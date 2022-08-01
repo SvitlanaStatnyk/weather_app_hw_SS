@@ -83,3 +83,8 @@ li:first-letter {
   font-size: 16px;
   opacity: 0.5;
 }
+.logo {
+  display: left;
+  margin: 30px auto;
+  width: 150px;
+}
