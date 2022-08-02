@@ -67,6 +67,25 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
+function fahrenheit(event) {
+  event.preventDefault();
+  let changesFC = document.querySelector("#temperature");
+  let temperature = changesFC.innerHTML;
+  temperature = Number(temperature);
+  changesFC.innerHTML = Math.round(temperature * 1.8) + 32;
+}
+let fahrenheitTemp = document.querySelector("#fahrenheit-link");
+fahrenheitTemp.addEventListener("click", fahrenheit);
+
+function celsius(event) {
+  event.preventDefault();
+  let changeCF = document.querySelector("#temperature");
+  changeCF.innerHTML = 19;
+}
+let celsiusTemp = document.querySelector("#celsius-link");
+celsiusTemp.addEventListener("click", celsius);
+
+
 function getForecast(coordinates) {
   let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
