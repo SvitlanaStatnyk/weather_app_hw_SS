@@ -3,12 +3,12 @@ body {
 }
 
 h1 {
-  color: #878787;
-  font-size: 24px;
-  font-weight: 100;
-  line-height: 28px;
+  color: black;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 34px;
   margin-bottom: 0;
-}
+ }
 
 ul {
   margin: 0;
@@ -38,7 +38,12 @@ li:first-letter {
 .weather-app {
   padding: 20px;
   border: 1px solid #dadde1;
-  border-radius: 5px;
+  border-radius: 10px;
+  background-color: whitesmoke;
+}
+
+.form-control {
+background-color: rgb(227, 231, 238);
 }
 
 .overview {
@@ -55,7 +60,7 @@ li:first-letter {
   color: rgb(33, 33, 33);
   font-size: 64px;
   line-height: 1;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .weather-temperature .units {
