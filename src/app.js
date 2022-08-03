@@ -67,32 +67,46 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
-function fahrenheit(event) {
+function displayFahrenheitTemperature(event) {
   event.preventDefault();
-  let changesFC = document.querySelector("#temperature");
-  let temperature = changesFC.innerHTML;
-  temperature = Number(temperature);
-  changesFC.innerHTML = Math.round(temperature * 1.8) + 32;
-}
-let fahrenheitTemp = document.querySelector("#fahrenheit-link");
-fahrenheitTemp.addEventListener("click", fahrenheit);
+  let temperatureElement = document.querySelector("#temperature");
 
-function celsius(event) {
+celsiusLink.classList.remove("active");
+fahrenheitLink.classList.add("active");
+
+let fahrenheiTemperature = (celsiusTemperature * 1.8) + 32;
+temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
+}
+
+function displayCelsiusTemperature(event) {
   event.preventDefault();
-  let changeCF = document.querySelector("#temperature");
-  changeCF.innerHTML = 19;
+celsiusLink.classList.add("active");
+fahrenheitLink.classList.remove("active");
+let temperatureElement = document.querySelector("#temperature");
+temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
-let celsiusTemp = document.querySelector("#celsius-link");
-celsiusTemp.addEventListener("click", celsius);
+let celsiusTemperature = null;
 
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+
+function weather(response) {
+  document.querySelector("#city").innerHTML = response.data.name;
+  document.querySelector("#temperature").innerHTML = Math.round(
+    response.data.main.temp
+  );
+  }
 
 function getForecast(coordinates) {
   let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
-
-function displayTemperature(response) {
+  function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
   let descriptionElement = document.querySelector("#description");
@@ -103,7 +117,6 @@ function displayTemperature(response) {
 
   celsiusTemperature = response.data.main.temp;
 
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
   cityElement.innerHTML = response.data.name;
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
